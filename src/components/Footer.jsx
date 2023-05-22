@@ -9,13 +9,13 @@ import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
     return (
         <Container>
-            <Email href="mailto:" target="_blank">
+            <Email href="mailto:fra.pollono@gmail.com" target="_blank" >
                 <FontAwesomeIcon icon={faEnvelope} bounce />
             </Email>    
             <Copyrigth>
                 © 2021 Francesca Pollono
             </Copyrigth>
-            <Instagram href="https://www.instagram.com/francescapollono/" target="_blank">
+            <Instagram href="https://www.instagram.com/frae.im/" target="_blank" rel="noreferral">
                 <FontAwesomeIcon icon={faInstagram} bounce />
             </Instagram>
         </Container>
