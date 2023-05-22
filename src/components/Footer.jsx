@@ -6,7 +6,7 @@ import {faInstagram} from "@fortawesome/free-brands-svg-icons";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <Container>
             <Email href="mailto:" target="_blank">
