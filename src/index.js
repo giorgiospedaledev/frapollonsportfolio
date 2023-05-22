@@ -12,7 +12,7 @@ const IMAGES = [
         title: "Fashion",
         images: [...Array(25).keys()].map((i) =>
             (
-                require(`./assets/images/fashion/${(i+1).toString().padStart(2, '0')}.jpg`)
+                require(`./assets/images/fashion/${(i+1).toString().padStart(2, '0')}-min.jpg`)
             ))
     }
     ,
@@ -20,7 +20,7 @@ const IMAGES = [
         title: "Milano Fashion Week",
         images: [...Array(30).keys()].map((i) =>{
             return  (
-                require(`./assets/images/milanofashionweek/${(i+1).toString().padStart(2, '0')}.jpg`)
+                require(`./assets/images/milanofashionweek/${(i+1).toString().padStart(2, '0')}-min.jpg`)
             )
         })
 
@@ -30,7 +30,7 @@ const IMAGES = [
         title: "Artists",
         images: [...Array(30).keys()].map((i) =>
             (
-                require(`./assets/images/artists/${(i+1).toString().padStart(2, '0')}.jpg`)
+                require(`./assets/images/artists/${(i+1).toString().padStart(2, '0')}-min.jpg`)
             ))
     }
 ]
