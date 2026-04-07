@@ -1,13 +1,31 @@
 import styled from "styled-components";
-import PortraitImage from "../assets/images/portrait.jpg";
+import PortraitImage from "../assets/images/portrait.webp";
+import {useEffect, useRef, useState} from "react";
 
 export default function AboutMeSection() {
+    const ref = useRef(null);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+            {threshold: 0.2}
+        );
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <Container>
+        <Container id="about" ref={ref} $visible={visible}>
             <Title>About me</Title>
             <ContentContainer>
-                <Portrait></Portrait>
-                <Paragraph><span>Francesca Pollono</span>, 21 years old,
+                <Portrait
+                    src={PortraitImage}
+                    alt="Portrait of Francesca Pollono"
+                    loading="lazy"
+                />
+                <Paragraph>
+                    <span>Francesca Pollono</span>, 21 years old,
                     is a professional photographer with a great passion for the art of photography.
                     Her specialization mainly focuses on fashion, portraits, backstage's, and events.
                     In addition to her passion for photography, Francesca is always looking for new
@@ -15,116 +33,100 @@ export default function AboutMeSection() {
                     she is ready to face any challenge and overcome any obstacles that may come her way.
                     She studied at the European Institute of Design (IED) in Milan specializing in Fashion
                     Photography and worked in communication and wedding agencies.
-
-
                 </Paragraph>
             </ContentContainer>
         </Container>
-
-
-        );
+    );
 }
 
-const Container = styled.div`
+const Container = styled.section`
     background-color: #fff;
     width: 100%;
-    padding: 0 30px;
+    padding: 0 40px;
+    padding-top: 90px;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 20;
+    opacity: ${({$visible}) => $visible ? 1 : 0};
+    transform: translateY(${({$visible}) => $visible ? '0' : '30px'});
+    transition: opacity 0.8s ease, transform 0.8s ease;
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
     text-align: center;
     font-size: 2.5rem;
     font-weight: 700;
     font-style: italic;
     color: #000;
-    cursor: pointer;
     text-transform: uppercase;
     font-family: 'Ysabeau', serif;
-    line-height: 0.7;
-    padding-top: 10vh;
-        
-    
+    padding-top: 8vh;
+    margin-bottom: 2vh;
+
     @media screen and (max-width: 768px) {
         font-size: 1.5rem;
-        line-height: 1;
-        font-weight: bold;
         padding-top: 5vh;
     }
 `;
 
 const ContentContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    max-width: 1200px;
     width: 100%;
-    padding: 0 30px;
+    gap: 40px;
     margin: 3vh 0;
-    
+
     @media screen and (max-width: 768px) {
         flex-direction: column;
+        gap: 20px;
     }
 `;
 
-
-const Portrait = styled.div`
+const Portrait = styled.img`
     flex: 1;
-    background-image: url(${PortraitImage});
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-    
+    max-width: 350px;
+    width: 100%;
     aspect-ratio: 3/4;
     object-fit: cover;
-    padding: 0;
-  
-    @media screen and (max-width: 768px) {
-        width: 100%;
-      box-shadow: none;
-    }
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
+    @media screen and (max-width: 768px) {
+        max-width: 100%;
+        box-shadow: none;
+    }
 `;
 
 const Paragraph = styled.div`
-  flex: 2;
-  margin-left: 30px;
-  padding: 0 50px;
-  text-align: justify;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: #000;
-  border-right: 3px solid #000;
-  font-family: 'Montserrat', sans-serif;
-
-
-  span {
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-style: italic;
-    color: #000;
-    text-transform: uppercase;
+    flex: 2;
+    padding: 0 30px;
+    text-align: justify;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    font-weight: 400;
+    color: #333;
+    border-right: 2px solid #000;
     font-family: 'Montserrat', sans-serif;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    margin: 30px 0 0;
-    padding: 0;
-    font-size: 1rem;
-    border-right: none;
 
     span {
-      font-size: 1rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        font-style: italic;
+        color: #000;
+        text-transform: uppercase;
     }
-  }
+
+    @media screen and (max-width: 768px) {
+        padding: 0;
+        font-size: 1rem;
+        line-height: 1.7;
+        border-right: none;
+
+        span {
+            font-size: 1rem;
+        }
+    }
 `;
-
-
-
-
